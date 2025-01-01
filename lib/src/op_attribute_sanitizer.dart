@@ -33,6 +33,7 @@ class OpAttributes {
     String? target,
     String? rel,
     bool? renderAsBlock,
+    num? lineHeight,
   }) {
     this.background = background;
     this.color = color;
@@ -58,6 +59,7 @@ class OpAttributes {
     this.target = target;
     this.rel = rel;
     this.renderAsBlock = renderAsBlock;
+    this.lineHeight = lineHeight;
   }
 
   final Map<String, dynamic> attrs = {};
@@ -175,6 +177,11 @@ class OpAttributes {
   set renderAsBlock(bool? v) =>
       v == null ? attrs.remove('renderAsBlock') : attrs['renderAsBlock'] = v;
 
+  num? get lineHeight => _getNumber('line-height');
+
+  set lineHeight(num? v) =>
+      v == null ? attrs.remove('line-height') : attrs['line-height'] = v;
+
   dynamic operator [](String key) => attrs[key];
   void operator []=(String key, dynamic value) {
     attrs[key] = value;
@@ -266,6 +273,7 @@ class OpAttributeSanitizer {
       'target',
       'rel',
       'code-block',
+      'line-height',
     ];
 
     for (var prop in booleanAttrs) {
@@ -328,6 +336,13 @@ class OpAttributeSanitizer {
         cleanAttrs['code-block'] = codeBlock;
       } else {
         cleanAttrs['code-block'] = isTruthy(codeBlock);
+      }
+    }
+
+    if (isTruthy(dirtyAttrs['line-height'])) {
+      final lineHeight = dirtyAttrs['line-height'];
+      if (lineHeight is num && lineHeight > 0 && lineHeight <= 3) {
+        cleanAttrs['line-height'] = lineHeight;
       }
     }
 

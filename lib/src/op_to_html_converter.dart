@@ -227,6 +227,7 @@ class OpToHtmlConverter {
         ['font', 'font-family'],
         ['size'],
         ['list'],
+        ['line-height'],
       ]);
     }
 
