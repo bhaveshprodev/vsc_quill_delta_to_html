@@ -440,4 +440,18 @@ class OpAttributeSanitizer {
     return RegExp(r'^[a-zA-Z\s\-\\/+]{1,50}$', caseSensitive: false)
         .hasMatch(lang.toString());
   }
+
+  static String getFontSize(num? value) {
+    if (value == 1) {
+      return '18px';
+    } else if (value == 1.15) {
+      return '22px';
+    } else if (value == 1.5) {
+      return '26px';
+    } else if (value == 2) {
+      return '32px';
+    } else {
+      return '18px'; // Default value
+    }
+  }
 }

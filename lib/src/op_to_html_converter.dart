@@ -128,7 +128,7 @@ class OpToHtmlConverter {
   HtmlParts getHtmlParts() {
     if (op.isJustNewline() && !op.isContainerBlock()) {
       if(op.isNewLineWithLineHeight()) {
-        return HtmlParts(openingTag: '</br><span style="line-height:${op.attributes.lineHeight}">', closingTag: '', content:'');
+        return HtmlParts(openingTag: '</br><span style="line-height:${OpAttributeSanitizer.getFontSize(op.attributes.lineHeight)}">', closingTag: '', content:'');
       } else {
         return HtmlParts(openingTag: '', closingTag: '', content: newLine);
       }
