@@ -91,6 +91,10 @@ class DeltaInsertOp {
     return insert.value == newLine;
   }
 
+  bool isNewLineWithLineHeight() {
+    return insert.value == newLine && attributes.lineHeight != null;
+  }
+
   bool isList() {
     return (isOrderedList() ||
         isBulletList() ||

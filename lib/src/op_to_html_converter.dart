@@ -127,7 +127,11 @@ class OpToHtmlConverter {
 
   HtmlParts getHtmlParts() {
     if (op.isJustNewline() && !op.isContainerBlock()) {
-      return HtmlParts(openingTag: '', closingTag: '', content: newLine);
+      if(op.isNewLineWithLineHeight()) {
+        return HtmlParts(openingTag: '<span style="line-height:${op.attributes.lineHeight}">', closingTag: '</br>', content:'');
+      } else {
+        return HtmlParts(openingTag: '', closingTag: '', content: newLine);
+      }
     }
 
     final tags = getTags();
